@@ -28,7 +28,8 @@ class MostPopular extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mostPopular: []
+            mostPopular: [],
+            loader: true
         }
     }
 
@@ -39,7 +40,8 @@ class MostPopular extends Component {
                 //console.log(response.data)
 
                 this.setState({
-                    mostPopular: response.data
+                    mostPopular: response.data,
+                    loader: false
                 })
             })
     }
@@ -56,28 +58,36 @@ class MostPopular extends Component {
                             <h2>Most <span>Popular</span></h2>
                         </div>
                         <div className="product-box">
-
-                            <Carousel responsive={responsive} >
-                                {mostPopularListFinal.map((item, i) => {
-                                    return (
-
-
-                                        <div className="product-single" key={i}>
-                                            <div className="pic"><img src={item.image} alt="Product" /></div>
-                                            <div className="product-title">
-                                                <a href="#">
-                                                    <h4>{item.title}</h4>
-                                                </a>
-                                                <h2 className="price">{item.price}</h2>
-                                            </div>
-                                            <div className="new-tag">New</div>
-
-                                        </div>
+                            {(this.state.loader) ?
+                                <div className="loader"></div>
+                                :
+                                <>
+                                    <Carousel responsive={responsive} >
+                                        {mostPopularListFinal.map((item, i) => {
+                                            return (
 
 
-                                    )
-                                })}
-                            </Carousel>
+                                                <div className="product-single" key={i}>
+                                                    <div className="pic"><img src={item.image} alt="Product" /></div>
+                                                    <div className="product-title">
+                                                        <a href="#">
+                                                            <h4>{item.title}</h4>
+                                                        </a>
+                                                        <h2 className="price">{item.price}</h2>
+                                                    </div>
+                                                    <div className="new-tag">New</div>
+
+                                                </div>
+
+
+                                            )
+                                        })}
+                                    </Carousel>
+                                </>
+                            }
+
+
+
                         </div>
 
                     </div>

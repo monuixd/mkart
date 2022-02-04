@@ -50,7 +50,9 @@ class ProductList extends Component {
         var pCategory = location.pCategory;
         var allCategory = location.allCategory;
         //console.log("CHeck 1", this.props);
+        console.log("CHeck 1", this.props);
         const filterData = productCatItemList.filter((item, i) => item.category == pCategory);
+
 
         return (
             <>
@@ -65,14 +67,14 @@ class ProductList extends Component {
                                     <div className="categories-list-box">
                                         <h4>Categories</h4>
                                         <div className="cat-listing">
-                                            <ul id="prd_cat_list">
-                                                {this.state.productCatItem.map((item, i) => {
+                                            <ul>
+                                                {allCategory.map((item, i) => {
                                                     return (
-                                                        <li className="active"><a href="products.html"><span>{item.category}</span> <span>( 04 )</span></a>
-                                                            <ul>
-                                                                <li><a href="single-product.html">{item.title}</a> </li>
-                                                            </ul>
-                                                        </li>
+                                                        <li key={i}>
+                                                            <Link to={{
+                                                                pathname: '/product-list'
+                                                            }}>{item.category}
+                                                            </Link></li>
                                                     )
                                                 })}
 
@@ -94,7 +96,8 @@ class ProductList extends Component {
                                                             <div className="pic"><img src={item.image} alt={item.name} /></div>
                                                             <div className="product-title">
                                                                 <Link to={{
-                                                                    pathname: "/product-detail"
+                                                                    pathname: "/product-detail",
+                                                                    currentItem: item.id
                                                                 }}>
                                                                     <h4>{item.title}</h4>
                                                                     <p>{item.description}</p>

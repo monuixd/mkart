@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Breadcrumb from "./breadcrumb";
 import axios from "axios";
+
 
 
 class ProductDetail extends Component {
@@ -26,10 +28,10 @@ class ProductDetail extends Component {
 
         var productItemDetailFinal = this.state.productItemDetail;
 
-        var { location } = this.props;
-        //pCategory = location.pCategory;
-        console.log("MCAT", productItemDetailFinal);
-        //const filterData = productItemDetailFinal.filter((item, i) => item.category == pCategory)
+        const { location } = this.props;
+        var currentItem = location.currentItem;
+        var prodCurrentItem = productItemDetailFinal.filter((item) => item.id == currentItem);
+
 
 
         return (
@@ -39,7 +41,7 @@ class ProductDetail extends Component {
 
                     <div className="single-products-wrp">
                         <div className="container">
-                            {productItemDetailFinal.map((item) => {
+                            {prodCurrentItem.map((item) => {
                                 return (
                                     <div className="single-product-box">
 
@@ -53,10 +55,15 @@ class ProductDetail extends Component {
                                             <div className="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                                                 <div className="dscb">
                                                     <h3>{item.title}</h3>
-                                                    <h4>{item.category}</h4>
+                                                    <h4>
+                                                        <Link to={{
+                                                            pathname: '/product-list',
+                                                            pCategory: item.category,
+                                                        }}>{item.category}</Link>
+                                                    </h4>
                                                     <p>{item.description}</p>
                                                     <h2 className="price"><i className="fa fa-rupee"></i> {item.price}</h2>
-                                                    <a href="#">Rating : <span class="badge">{item.rating.rate}</span></a>
+                                                    <p>Rating : <span className="badge">{item.rating.rate}</span></p>
                                                 </div>
                                             </div>
 

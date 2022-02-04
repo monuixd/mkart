@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Formik, Field, Form } from "formik"
 
 class StayUpdate extends Component {
     render() {
@@ -13,10 +14,28 @@ class StayUpdate extends Component {
                             </div>
                             <div className="col-md-7 col-sm-7 col-xs-12">
                                 <div className="subscribe-box">
-                                    <form >
-                                        <input className="form-control" type="email" placeholder="Your email address..." />
-                                        <input type="button" className="btn" value="Subscribe" />
-                                    </form>
+                                    <Formik
+                                        initialValues={{
+                                            email: ''
+                                        }}
+                                        onSubmit={(values) => {
+                                            console.log(values);
+                                        }}
+                                    >
+                                        {({ }) => (
+                                            <Form>
+                                                <Field
+                                                    name="email"
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Your email address..."
+                                                />
+                                                <input type="submit" className="btn" value="Subscribe" />
+                                            </Form>
+                                        )}
+
+                                    </Formik>
+
                                 </div>
                             </div>
                         </div>

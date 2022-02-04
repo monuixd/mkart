@@ -1,9 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import StayUpdate from './stayUpdate';
+import axios from 'axios';
 
 class Footer extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            prodCatList: []
+        }
+    }
+
+    componentDidMount() {
+
+        axios.get("https://fakestoreapi.com/products")
+            .then(res => {
+
+                this.setState({
+                    prodCatList: res.data
+                })
+
+            })
+    }
+
     render() {
+        const prodCatListFinal = this.state.prodCatList;
         return (
             <>
                 <StayUpdate />
@@ -27,17 +49,12 @@ class Footer extends React.Component {
                                 <div className="footer-menu">
                                     <h4>Featured Categories</h4>
                                     <ul>
-                                        <li><a href="#">Covid Essentials</a></li>
-                                        <li><a href="#">Healthcare Devices</a></li>
-                                        <li><a href="#">Health Food and Drinks</a></li>
-                                        <li><a href="#">Personal Care</a></li>
-                                        <li><a href="#">Ayurvedic Care</a></li>
-                                        <li><a href="#">Mother and Baby Care</a></li>
-                                        <li><a href="#">Accessories And Wearables</a></li>
-                                        <li><a href="#">Skin Care</a></li>
-                                        <li><a href="#">Health Condition</a></li>
-                                        <li><a href="#">Home Care</a></li>
-                                        <li><a href="#">Fitness & Supplements</a></li>
+                                        {prodCatListFinal.map((item, i) => {
+                                            return (
+                                                <li key={i}><a href="#">{item.category}</a></li>
+                                            )
+                                        })}
+
                                     </ul>
                                 </div>
                             </div>
