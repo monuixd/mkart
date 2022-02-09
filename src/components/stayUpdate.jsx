@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import { Formik, Field, Form } from "formik"
+import ErrorMsg from './ErrorMsg';
+import * as yup from 'yup';
+
+const emailvalidation = yup.object({
+    email: yup.string().required("This filed is required")
+})
 
 class StayUpdate extends Component {
     render() {
@@ -15,6 +21,7 @@ class StayUpdate extends Component {
                             <div className="col-md-7 col-sm-7 col-xs-12">
                                 <div className="subscribe-box">
                                     <Formik
+                                        validationSchema={emailvalidation}
                                         initialValues={{
                                             email: ''
                                         }}
@@ -31,6 +38,7 @@ class StayUpdate extends Component {
                                                     placeholder="Your email address..."
                                                 />
                                                 <input type="submit" className="btn" value="Subscribe" />
+                                                <ErrorMsg name="email" />
                                             </Form>
                                         )}
 

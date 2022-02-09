@@ -6,15 +6,17 @@ class Products extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            productList: [],
+            productList: {},
             loader: true
 
         }
     }
 
     componentDidMount() {
-        axios.get("https://fakestoreapi.com/products")
+        // axios.get("https://fakestoreapi.com/products")
+        axios.get("https://rss.applemarketingtools.com/api/v2/us/music/most-played/50/albums.json")
             .then(Response => {
+                console.log(Response)
                 this.setState({
                     productList: Response.data
                 })
