@@ -1,7 +1,7 @@
 import Header from './components/header';
 import Home from './components/home';
 import Footer from './components/footer';
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import AboutUs from './components/aboutus';
 import ProductList from './components/product-list';
 import ProductDetail from './components/product-detail';
@@ -16,7 +16,7 @@ import ContactUs from './components/contactus';
 
 
 function App() {
-  const user = {name : 'Monu', loggedIn: true}
+  const user = { name: 'Monu', loggedIn: true }
   return (
     <div className="App">
       {/* <UserProvider value={user}>
@@ -24,20 +24,20 @@ function App() {
         <UserProfile1 />
       </UserProvider> */}
 
-    {/* <ParentCom/> */}
+      {/* <ParentCom/> */}
 
-     
 
-      <Header/>
+
+      <Header />
       <Switch>
-      <Route exact path='/' component={Home} />
-      <Route path='/about-us' component={AboutUs} />
-      <Route path="/product-list" component={ProductList} />
-      <Route path="/product-detail" component={ProductDetail} />
-      <Route path="/contact-us" component={ContactUs} />
-      
+        <Route exact path='/' component={Home} />
+        <Route path='/about-us' component={AboutUs} />
+        <Route path="/product-list" component={ProductList} />
+        <Route path="/product-detail" component={ProductDetail} />
+        <Route path="/contact-us" component={ContactUs} />
+
       </Switch>
-      <Footer/>
+      <Footer />
 
       {/* <Counter /> */}
     </div>
