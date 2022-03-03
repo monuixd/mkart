@@ -1,57 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 class Products extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            productList: {},
-            loader: true
-
-        }
-    }
-
-    componentDidMount() {
-        axios.get("https://fakestoreapi.com/products")
-            //axios.get("https://rss.applemarketingtools.com/api/v2/us/music/most-played/50/albums.json")
-            .then(Response => {
-                console.log(Response)
-                this.setState({
-                    productList: Response.data
-                })
-
-                let productCatArray = [];
-                this.state.productList.filter((item) => {
-
-                    let prodCat = productCatArray.findIndex(el => {
-                        return el.category === item.category
-                    })
-
-                    if (prodCat <= -1) {
-                        productCatArray.push({
-                            category: item.category,
-                            name: item.name,
-                            price: item.price,
-                            image: item.image
-                        })
-                    }
-
-                })
-
-                this.setState({
-                    productList: productCatArray,
-                    loader: false
-
-                })
-            })
-
-    }
-
 
     render() {
 
-        const productListFinal = this.state.productList;
+        const productListFinal = this.props.productList;
 
         return (
 
@@ -62,7 +16,7 @@ class Products extends React.Component {
                     </div>
                     <div className="product-box">
                         <div className="product-box-row">
-                            {(this.state.loader) ?
+                            {(this.props.loader) ?
                                 <div className="loader"></div>
                                 :
                                 <>

@@ -1,31 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import StayUpdate from './stayUpdate';
-import axios from 'axios';
 
 class Footer extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            prodCatList: []
-        }
-    }
-
-    componentDidMount() {
-
-        axios.get("https://fakestoreapi.com/products")
-            .then(res => {
-
-                this.setState({
-                    prodCatList: res.data
-                })
-
-            })
-    }
-
+    
     render() {
-        const prodCatListFinal = this.state.prodCatList;
+        const prodCatListFinal = this.props.prodCat;
+        console.log("FOOTER ", this.props)
         return (
             <>
                 <StayUpdate />
