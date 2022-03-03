@@ -8,7 +8,16 @@ import ProductList from './components/product-list';
 import ProductDetail from './components/product-detail';
 import ContactUs from './components/contactus';
 
+// import ParentCom from "./components/parentCom";
+// import Counter from "./components/counter";
+
+// import { UserProvider } from "./components/UserContext";
+// import UserProfile from "./components/UserProfile";
+// import UserProfile1 from "./components/UserProfile1";
+
+
 class App extends Component {
+  //const user = { name: 'Monu', loggedIn: true }
 
   constructor(props) {
     super(props);
@@ -18,11 +27,9 @@ class App extends Component {
 
     }
 
-    this.handleCallback = this.handleCallback.bind(this)
   }
 
 handleCallback (childData) {
-  console.log("APP CONS", {childData})
   this.setState ({
     products:childData.productCatArray
   })
@@ -30,9 +37,16 @@ handleCallback (childData) {
 
  render(){
 
-  console.log("APP Render", this.state.products)
   return (
     <div className="App">
+      {/* <UserProvider value={user}>
+        <UserProfile />
+        <UserProfile1 />
+      </UserProvider> */}
+
+      {/* <ParentCom/> */}
+
+
 
       <Header />
       <Switch>
