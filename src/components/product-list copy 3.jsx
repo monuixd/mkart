@@ -1,8 +1,27 @@
 import React, { Component } from "react";
 import Breadcrumb from "./breadcrumb";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class ProductList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            productCatItem: []
+        }
+        this.addToCart = this.addToCart.bind(this);
+        this.removeCart = this.removeCart.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get("https://fakestoreapi.com/products")
+            .then(res => {
+                this.setState({
+                    productCatItem: res.data
+                })
+            })
+    }
 
     addToCart(item) {
         this.state.productCatItem.map((el) => {
@@ -26,17 +45,13 @@ class ProductList extends Component {
 
 
     render() {
-
-
+        const productCatItemList = this.state.productCatItem;
         const { location } = this.props
-
-        const productItemList = location.prodAllItem;
-        //console.log("CHeck 1", productCatItemList);
-
         var pCategory = location.pCategory;
         var allCategory = location.allCategory;
-
-        const filterData = productItemList.filter((item, i) => item.category == pCategory);
+        //console.log("CHeck 1", this.props);
+        console.log("CHeck 1", this.props);
+        const filterData = productCatItemList.filter((item, i) => item.category == pCategory);
 
 
         return (
@@ -58,10 +73,8 @@ class ProductList extends Component {
                                                         <li key={i}>
                                                             <Link to={{
                                                                 pathname: '/product-list'
-                                                            }}>
-                                                                {item.category}
-                                                            </Link>
-                                                        </li>
+                                                            }}>{item.category}
+                                                            </Link></li>
                                                     )
                                                 })}
 
@@ -84,15 +97,13 @@ class ProductList extends Component {
                                                             <div className="product-title">
                                                                 <Link to={{
                                                                     pathname: "/product-detail",
-                                                                    currentItem: item.id,
-                                                                    prodAllItem: productItemList
+                                                                    currentItem: item.id
                                                                 }}>
                                                                     <h4>{item.title}</h4>
                                                                     <p>{item.description}</p>
                                                                     <h2 className="price"><i className="fa fa-rupee"></i> {item.price}</h2>
                                                                 </Link>
-                                                                <button className="btn btn-warning" onClick={(e) => this.addToCart(item)}>Add to Cart</button>
-                                                                {/* {(item.qty == 0) ?
+                                                                {(item.qty == 0) ?
                                                                     <button className="btn btn-warning" onClick={(e) => this.addToCart(item)}>Add to Cart</button>
                                                                     :
                                                                     <div className="counter-box">
@@ -101,10 +112,10 @@ class ProductList extends Component {
                                                                         <button className="btn btn-white" onClick={(e) => this.addToCart(item)}>+</button>
                                                                     </div>
 
-                                                                } */}
+                                                                }
 
                                                             </div>
-                                                            {/* <div className="new-tag">New</div> */}
+                                                            <div className="new-tag">New</div>
 
                                                         </div>
                                                     </div>

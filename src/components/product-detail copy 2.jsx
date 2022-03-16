@@ -1,15 +1,36 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Breadcrumb from "./breadcrumb";
+import axios from "axios";
+
+
 
 class ProductDetail extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            productItemDetail: []
+        }
+    }
+
+    componentDidMount() {
+        axios.get("https://fakestoreapi.com/products")
+            .then(res => {
+                this.setState({
+                    productItemDetail: res.data
+                })
+            })
+
+
+    }
 
     render() {
 
+        var productItemDetailFinal = this.state.productItemDetail;
+
         const { location } = this.props;
-        var productItemDetail = location.prodAllItem;
         var currentItem = location.currentItem;
-        var prodCurrentItem = productItemDetail.filter((item) => item.id == currentItem);
+        var prodCurrentItem = productItemDetailFinal.filter((item) => item.id == currentItem);
 
 
 
@@ -32,7 +53,7 @@ class ProductDetail extends Component {
                                                 </div>
                                             </div>
                                             <div className="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                                                <div className="dscb m-b-20">
+                                                <div className="dscb">
                                                     <h3>{item.title}</h3>
                                                     <h4>
                                                         <Link to={{
@@ -43,9 +64,7 @@ class ProductDetail extends Component {
                                                     <p>{item.description}</p>
                                                     <h2 className="price"><i className="fa fa-rupee"></i> {item.price}</h2>
                                                     <p>Rating : <span className="badge">{item.rating.rate}</span></p>
-
                                                 </div>
-                                                <button className="btn btn-warning btn-lg">Add to Cart</button>
                                             </div>
 
 

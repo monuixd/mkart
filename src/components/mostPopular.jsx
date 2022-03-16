@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Carousel from "react-multi-carousel";
-import axios from 'axios';
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const responsive = {
     superLargeDesktop: {
@@ -25,30 +25,10 @@ const responsive = {
 
 
 class MostPopular extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            mostPopular: [],
-            loader: true
-        }
-    }
-
-
-    componentDidMount() {
-        axios.get("https://fakestoreapi.com/products")
-            .then(response => {
-                //console.log(response.data)
-
-                this.setState({
-                    mostPopular: response.data,
-                    loader: false
-                })
-            })
-    }
 
     render() {
-
-        const mostPopularListFinal = this.state.mostPopular;
+        //console.log("PROP MOST", this.props);
+        const productItemList = this.props.prodItemList;
 
         return (
             <>
@@ -58,24 +38,30 @@ class MostPopular extends Component {
                             <h2>Most <span>Popular</span></h2>
                         </div>
                         <div className="product-box">
-                            {(this.state.loader) ?
+                            {(this.props.loader) ?
                                 <div className="loader"></div>
                                 :
                                 <>
                                     <Carousel responsive={responsive} >
-                                        {mostPopularListFinal.map((item, i) => {
+                                        {productItemList.map((item, i) => {
                                             return (
 
 
                                                 <div className="product-single" key={i}>
                                                     <div className="pic"><img src={item.image} alt="Product" /></div>
                                                     <div className="product-title">
-                                                        <a href="#">
-                                                            <h4>{item.title}</h4>
-                                                        </a>
-                                                        <h2 className="price">{item.price}</h2>
+                                                        <Link to={{
+                                                            pathname: "/product-detail",
+                                                            currentItem: item.id,
+                                                            prodAllItem: productItemList
+
+                                                        }}>
+                                                            <h4>
+                                                                <small>{item.category}</small><br />
+                                                                {item.title}</h4>
+                                                        </Link>
+                                                        <h2 className="price"><i className="fa fa-inr"></i> {item.price}</h2>
                                                     </div>
-                                                    <div className="new-tag">New</div>
 
                                                 </div>
 

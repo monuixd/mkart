@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import Slider1 from './slider1';
 import Promotion from './promotion';
 import Products from './products';
-// import ProductCat from './productCategory';
 import MostPopular from './mostPopular';
 import Login from './login';
-//import Register from './register';
 import RegisterFormik from './RegisterFormik';
 import axios from 'axios';
 
@@ -15,7 +13,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productList: {},
+            productList: [],
+            productItem: [],
             loader: true
 
         }
@@ -24,14 +23,14 @@ class Home extends Component {
     componentDidMount() {
         axios.get("https://fakestoreapi.com/products")
             //axios.get("https://rss.applemarketingtools.com/api/v2/us/music/most-played/50/albums.json")
-            .then(Response => {
-                console.log(Response)
+            .then(response => {
+                //console.log(response)
                 this.setState({
-                    productList: Response.data
+                    productItem: response.data
                 })
 
                 let productCatArray = [];
-                this.state.productList.filter((item) => {
+                this.state.productItem.filter((item) => {
 
                     let prodCat = productCatArray.findIndex(el => {
                         return el.category === item.category
@@ -55,7 +54,7 @@ class Home extends Component {
                 });
                 this.props.parentCallback({
                     productCatArray,
-                    loader : false
+                    loader: false
                 })
             })
 
@@ -70,8 +69,8 @@ class Home extends Component {
 
                 <section className="mid-wrp">
                     <Promotion />
-                    <MostPopular />
-                    <Products productList={this.state.productList} loader={this.state.loader} />
+                    <MostPopular prodItemList={this.state.productItem} loader={this.state.loader} />
+                    <Products productList={this.state.productList} prodItemList={this.state.productItem} loader={this.state.loader} />
 
                     {/* <ProductCat/> */}
 

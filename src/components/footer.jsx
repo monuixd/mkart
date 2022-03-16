@@ -4,10 +4,10 @@ import StayUpdate from './stayUpdate';
 
 class Footer extends React.Component {
 
-    
+
     render() {
         const prodCatListFinal = this.props.prodCat;
-        console.log("FOOTER ", this.props)
+        //console.log("FOOTER ", this.props)
         return (
             <>
                 <StayUpdate />

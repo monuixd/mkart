@@ -6,6 +6,9 @@ class Products extends React.Component {
     render() {
 
         const productListFinal = this.props.productList;
+        const productItemList = this.props.prodItemList;
+
+        //console.log("CHeck 1 productItemList", this.props);
 
         return (
 
@@ -28,7 +31,8 @@ class Products extends React.Component {
                                                     <Link to={{
                                                         pathname: '/product-list',
                                                         pCategory: item.category,
-                                                        allCategory: productListFinal
+                                                        allCategory: productListFinal,
+                                                        prodAllItem: productItemList
                                                     }}>
                                                         <div className="product-single">
                                                             <div className="pic">
@@ -37,7 +41,7 @@ class Products extends React.Component {
                                                             <div className="product-title">
                                                                 <h4>{item.category}</h4>
                                                             </div>
-                                                            <div className="new-tag">New</div>
+                                                            {/* <div className="new-tag">New</div> */}
                                                         </div>
                                                     </Link>
                                                 </div>

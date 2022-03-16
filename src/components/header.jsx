@@ -38,13 +38,11 @@ class Header extends React.Component {
                             <li><a href="#">Medicines</a></li>
                             <li><a href="#">Offers</a></li>
 
-                            {/* <li className="dropdown"><a href="#" data-toggle="dropdown" className="dropdown-toggle">Medicines</a>
+                            <li className="dropdown"><a href="#" data-toggle="dropdown" className="dropdown-toggle">Hooks</a>
                                 <ul className="dropdown-menu">
-                                    <li><a href="#">Tablets</a></li>
-                                    <li><a href="#">Capsule</a></li>
-                                    <li><a href="#">syrup</a></li>
-                                    <li><a href="#">sanitizer</a></li>
-                                </ul></li> */}
+                                    <li><a href="/hooks-products">Products</a></li>
+                                </ul>
+                            </li>
                             {/* <li><Link to="/contact-us">Contact Us</Link></li> */}
                             <li><a href="#loginModal" data-toggle="modal" className="btn btn-primary">Login</a></li>
 
